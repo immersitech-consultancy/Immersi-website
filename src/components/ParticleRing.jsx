@@ -15,7 +15,7 @@ const ParticleRing = () => {
         style={{ height: "100vh", background: "black" }}
         
       >
-        <OrbitControls enablePan={false} enableRotate={true} maxDistance={20} minDistance={10} />
+        <OrbitControls enablePan={false} enableRotate={true} maxDistance={20} minDistance={5} />
         <directionalLight />
         <pointLight position={[-30, 0, -30]} intensity={1} />
         <PointCircle />
