@@ -1,4 +1,3 @@
-// contacts.js
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere } from "@react-three/drei";
@@ -16,30 +15,10 @@ const Contacts = () => {
         <PointCircle />
       </Canvas>
       <div style={{
+        width: "50vw", height: "60vh",
         position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-        background: "rgba(255, 255, 255, 0.8)", padding: "2rem", borderRadius: "10px", zIndex: 10
+        background: "linear-gradient(45deg, rgba(230,4,172,1) 0%, rgba(235,98,13,1) 100%)", padding: "2rem", borderRadius: "10px", zIndex: 10,opacity: 0.7
       }}>
-        <h1>Contact Us</h1>
-        <form style={{ display: "flex", flexDirection: "column" }}>
-          <label>
-            Name:
-            <input type="text" name="name" style={{ margin: "0.5rem 0", padding: "0.5rem", borderRadius: "5px" }} />
-          </label>
-          <label>
-            Email:
-            <input type="email" name="email" style={{ margin: "0.5rem 0", padding: "0.5rem", borderRadius: "5px" }} />
-          </label>
-          <label>
-            Message:
-            <textarea name="message" style={{ margin: "0.5rem 0", padding: "0.5rem", borderRadius: "5px" }} />
-          </label>
-          <button type="submit" style={{
-            marginTop: "1rem", padding: "0.5rem", borderRadius: "5px",
-            background: "#333", color: "white", border: "none"
-          }}>
-            Submit
-          </button>
-        </form>
       </div>
     </div>
   );

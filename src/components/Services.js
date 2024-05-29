@@ -21,14 +21,12 @@ const Services = () => {
       </Canvas>
       <div style={{ position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)", zIndex: 10 }}>
         <div style={{ display: "flex", justifyContent: "center", gap: "2rem" }}>
-          <Card title="Web Development" description="Our skilled developers and designers work collaboratively to create intuitive, user-friendly applications and websites that enhance your digital presence. Whether you need a robust e-commerce platform, a sleek corporate website, or a powerful mobile app, we tailor our solutions to meet your unique needs. We specialize in:
-
-Custom Web Development
-Mobile App Development (iOS and Android)
-E-commerce Solutions
-UI/UX Design
-Progressive Web Apps (PWAs)
-Responsive Design and Developmentr" />
+          <Card title="Web Development" description="Our skilled developers and designers work collaboratively to create:          Custom Web Development
+          Mobile App Development (iOS and Android)
+          E-commerce Solutions
+          UI/UX Design
+          Progressive Web Apps (PWAs)
+          Responsive Design and Development" />
           <Card title="AWS Services" description="Leverage the power of Amazon Web Services (AWS) to optimize your infrastructure, enhance security, and scale your operations seamlessly. Our AWS-certified experts provide end-to-end services, ensuring your cloud environment is efficient, secure, and cost-effective. Our offerings include:
 
 AWS Cloud Migration
@@ -65,7 +63,7 @@ const SolarSystem = () => {
     { size: 1, distance: 16, color: "#0000ff", speed: 2.51, ring: true },  // 2
     { size: 0.53, distance: 20, color: "#ff4500", speed: 1.808, ring: true },  // 3
     { size: 2.2, distance: 28, color: "#ffa500", speed: 1.405, ring: true },  // 4
-    { size: 1.8, distance: 36, color: "#ffff00", speed: 1.25004, ring: true },  // 5
+    { size: 1.8, distance: 36, color: "#ffff00", speed: 1.25004, ring: true },  //5
     { size: 1.6, distance: 44, color: "#00ffff", speed: 1.1503, ring: true },  // 6
     { size: 1.5, distance: 52, color: "#0000ff", speed: 1.2002, ring: true },  // 7
   ], []);
