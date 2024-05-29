@@ -1,12 +1,8 @@
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere } from "@react-three/drei";
-import { pointsInner, pointsOuter } from "./components/utils";
-import Navbar from "./components/navbar";
-//import { BrowserRouter as Router,Link } from "react-router-dom";
-
-
-//import { BrowserRouter as Router,Route,Switch,Link } from "react-router-dom";
+import { pointsInner, pointsOuter } from "../utils";
+import Navbar from "./navbar";
 //linear-gradient(0deg, rgba(231, 16, 233, 1), rgba(255, 246, 27, 1))
 
 const ParticleRing = () => {
@@ -19,14 +15,11 @@ const ParticleRing = () => {
         style={{ height: "100vh", background: "black" }}
         
       >
-        <OrbitControls enablePan={false} enableRotate={false} maxDistance={20} minDistance={10} />
+        <OrbitControls enablePan={false} enableRotate={true} maxDistance={20} minDistance={5} />
         <directionalLight />
         <pointLight position={[-30, 0, -30]} intensity={1} />
         <PointCircle />
-
         <Navbar />
-        
-        
       </Canvas>
     </div>
   );
