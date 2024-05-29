@@ -4,8 +4,6 @@ import { OrbitControls, Sphere } from "@react-three/drei";
 import { pointsInner, pointsOuter } from "./components/utils";
 import Navbar from "./components/navbar";
 //import { BrowserRouter as Router,Link } from "react-router-dom";
-
-
 //import { BrowserRouter as Router,Route,Switch,Link } from "react-router-dom";
 //linear-gradient(0deg, rgba(231, 16, 233, 1), rgba(255, 246, 27, 1))
 
