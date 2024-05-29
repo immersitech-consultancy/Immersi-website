@@ -11,3 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.card{
+  background: linear-gradient(45deg, #000000, #d10ba8, #0dbdd5)
+}
