@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere } from "@react-three/drei";
+import { OrbitControls, Sphere,Box, Torus } from "@react-three/drei";
 
 const Contacts = () => {
   return (
@@ -13,13 +13,10 @@ const Contacts = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 0, 5]} intensity={1} />
         <PointCircle />
+        <AdditionalShapes />
+        <OrbitingSpheres />
       </Canvas>
-      <div style={{
-        width: "50vw", height: "60vh",
-        position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-        background: "linear-gradient(45deg, rgba(230,4,172,1) 0%, rgba(235,98,13,1) 100%)", padding: "2rem", borderRadius: "10px", zIndex: 10,opacity: 0.7
-      }}>
-      </div>
+
     </div>
   );
 };
@@ -50,7 +47,10 @@ const PointCircle = () => {
 
   useFrame(({ clock }) => {
     if (ref.current?.rotation) {
-      ref.current.rotation.z = clock.getElapsedTime() * 0.1;
+      const time = clock.getElapsedTime();
+      const speed = 0.5;
+      const angle = time * speed;
+      ref.current.rotation.y = angle;
     }
   });
 
@@ -65,10 +65,101 @@ const PointCircle = () => {
 
 const Point = React.memo(({ position, color }) => {
   return (
-    <Sphere position={position} args={[0.1, 10, 10]}>
+    <Sphere position={position} args={[0.6, 10, 10]}>
       <meshStandardMaterial emissive={color} emissiveIntensity={0.5} roughness={0.5} color={color} />
     </Sphere>
   );
 });
+
+const AdditionalShapes = () => {
+  const ref = useRef(null);
+  const shapes = useMemo(() => {
+    return [...Array(6)].map((_, idx) => ({
+      idx,
+      position: [
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 30,
+      ],
+      shape: Math.random() > 0.5 ? "Box" : "Torus",
+      color: Math.random() > 0.5 ? "#00ff00" : "#0000ff"
+    }));
+  }, []);
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      ref.current.rotation.x = clock.getElapsedTime() * 0.1;
+      ref.current.rotation.y = clock.getElapsedTime() * 0.1;
+    }
+  });
+
+  return (
+    <group>
+      {shapes.map(({ idx, position, shape, color }) => {
+        if (shape === "Box") {
+          return (
+            <Torus key={idx} position={position} args={[1.8, 1, 1]}>
+              <meshStandardMaterial color={color} />
+            </Torus>
+          );
+        } else {
+          return (
+            <Torus key={idx} position={position} args={[3.5, 0.2, 16, 100]}>
+              <meshStandardMaterial color={color} />
+            </Torus>
+          );
+        }
+      })}
+    </group>
+  );
+};
+
+const OrbitingSpheres = () => {
+  const ref = useRef(null);
+  const spheres = useMemo(() => {
+    return [...Array(5)].map((_, idx) => ({
+      idx,
+      position: [
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 30,
+        (Math.random() - 0.5) * 30,
+      ],
+      color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+      segments: [...Array(8)].map((_, segIdx) => ({
+        segIdx,
+        angle: (Math.PI * 2 * segIdx) / 8,
+        distance: 2 + Math.random() * 3
+      }))
+    }));
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      spheres.forEach((sphere) => {
+        sphere.segments.forEach((segment) => {
+          const angle = segment.angle + clock.getElapsedTime() * 0.5;
+          segment.x = Math.cos(angle) * segment.distance;
+          segment.z = Math.sin(angle) * segment.distance;
+        });
+      });
+    }
+  });
+
+  return (
+    <group ref={ref}>
+      {spheres.map(({ idx, position, color, segments }) => (
+        <group key={idx} position={position}>
+          <Sphere args={[1, 32, 32]}>
+            <meshStandardMaterial emissive={color} emissiveIntensity={0.5} roughness={0.5} color={color} />
+          </Sphere>
+          {segments.map(({ segIdx, x, z }) => (
+            <Sphere key={segIdx} position={[x, 0, z]} args={[0.2, 16, 16]}>
+              <meshStandardMaterial color="#ffffff" />
+            </Sphere>
+          ))}
+        </group>
+      ))}
+    </group>
+  );
+};
 
 export default Contacts;
