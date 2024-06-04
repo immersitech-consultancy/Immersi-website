@@ -7,7 +7,7 @@ const Contacts = () => {
     <div style={{ position: "relative", height: "100vh", background: "black" }}>
       <Canvas
         camera={{ position: [10, 0, 20] }}
-        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+        style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" }}
       >
         <OrbitControls enablePan={false} enableRotate={true} maxDistance={60} minDistance={20} />
         <ambientLight intensity={0.5} />
@@ -36,9 +36,9 @@ const PointCircle = () => {
     const outerPoints = [...Array(50)].map((_, idx) => ({
       idx: idx + 50,
       position: [
-        (Math.random() - 0.5) * 40,
-        (Math.random() - 0.5) * 40,
-        (Math.random() - 0.5) * 40,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 60,
+        (Math.random() - 0.5) * 80,
       ],
       color: "#ff00ff"
     }));
@@ -95,7 +95,7 @@ const AdditionalShapes = () => {
   return (
     <group>
       {shapes.map(({ idx, position, shape, color }) => {
-        if (shape === "Box") {
+        if (shape === "Torus") {
           return (
             <Torus key={idx} position={position} args={[1.8, 1, 1]}>
               <meshStandardMaterial color={color} />

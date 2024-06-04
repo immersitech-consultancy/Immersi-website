@@ -4,7 +4,7 @@ import { OrbitControls, Sphere } from "@react-three/drei";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { pointsInner, pointsOuter } from "./components/Ring";
 import Orbs from "./components/orbs";
-import Contacts from "./components/contacts";
+import Contacts from "./components/Contact";
 import Services from "./components/Services";
 
 

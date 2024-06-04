@@ -8,41 +8,22 @@ import * as THREE from "three";
 
 const Services = () => {
   return (
-    <div style={{ position: "relative", height: "100vh", background: "black" }}>
+    <div style={{ position: "relative", height: "100vh", width:"100vw", background: "black" }}>
       <Canvas
         camera={{ position: [20, 10, 30] }}
         style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
       >
         <OrbitControls enablePan={false} enableRotate={true} maxDistance={60} minDistance={20} />
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={5.5} />
         <pointLight position={[0, 0, 0]} intensity={1} color="#800080" />
         <Sun />
         <SolarSystem />
       </Canvas>
-      <div style={{ position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)", zIndex: 10 }}>
-        <div style={{ display: "flex", justifyContent: "center", gap: "2rem" }}>
-          <Card title="Web Development" description="Our skilled developers and designers work collaboratively to create:          Custom Web Development
-          Mobile App Development (iOS and Android)
-          E-commerce Solutions
-          UI/UX Design
-          Progressive Web Apps (PWAs)
-          Responsive Design and Development" />
-          <Card title="AWS Services" description="Leverage the power of Amazon Web Services (AWS) to optimize your infrastructure, enhance security, and scale your operations seamlessly. Our AWS-certified experts provide end-to-end services, ensuring your cloud environment is efficient, secure, and cost-effective. Our offerings include:
-
-AWS Cloud Migration
-Infrastructure as Code (IaC)
-DevOps and Continuous Integration/Continuous Deployment (CI/CD)
-AWS Security and Compliance
-Managed AWS Services
-Cost Optimization and Management" />
-          <Card title="Web3 Development" description="Embrace the future of decentralized technologies with our Web3 and blockchain consultancy services. We help you navigate the complexities of blockchain to unlock new business opportunities, improve transparency, and enhance security. Our expertise includes:
-
-Blockchain Development
-Smart Contract Development and Audits
-Decentralized Applications (DApps)
-Tokenization and Initial Coin Offerings (ICOs)
-NFT Development
-Blockchain Integration and Consulting" />
+      <div style={{ position: "absolute", top: "10%", left: "70%" }}>
+        <div style={{ display: "grid", justifyContent: "left", gap: "1rem", border:12}}>
+          <Card title="Web Development" description="E" />
+          <Card title="AWS Services" description="E" />
+          <Card title="Blockchain Development" description="E" />
         </div>
       </div>
     </div>

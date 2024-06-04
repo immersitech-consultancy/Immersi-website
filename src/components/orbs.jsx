@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, Sphere } from '@react-three/drei';
+import { Text, Sphere,Torus } from '@react-three/drei';
 import * as THREE from 'three';
 
 const Orbs = () => {
@@ -27,32 +27,54 @@ const Orbs = () => {
 
   return (
     <group position={navPosition} onPointerMove={onPointerMove}>
-      <Text fontSize={1.5} color="white" position={[1, 13, 0]} anchorX="center" anchorY="middle" textAlign="center">
-         
-      </Text>
-      <Text fontSize={1.5} color="white" position={[1, 10, 0]} anchorX="center" anchorY="middle" textAlign="center">
-        
-      </Text>
 
       {/* Navbar Background */}
       <Sphere args={[20, 52, 25]} position={[5, 0, 5]} onClick={() => handleNavigation('home')}>
         <meshStandardMaterial color={0x6e3a70} transparent opacity={0} />
       </Sphere>
 
+      <Torus args={[19,0.15,19,40]} rotation={[Math.PI/2,0,0]}>
+        <meshStandardMaterial color={0x6e3a70}/>
+      </Torus>
+  
       {/* Navbar Links */}
-      // Inside Navbars component
-{[
-  { label: '', page: 'contact', initialPosition: [0, 2, 6] },
-  { label: ' ', page: 'home', initialPosition: [0, 2, 6] }
-].map((item, index) => (
-  <NavLink key={index} label={item.label} page={item.page} initialPosition={item.initialPosition} handleNavigation={handleNavigation} />
-))}
+      {[
+        { label: '', page: 'contact', initialPosition: [0, 2, 6] },
+        { label: ' ', page: 'home', initialPosition: [0, 2, 6] }
+      ].map((item, index) => (
+        <NavLink key={index} label={item.label} page={item.page} initialPosition={item.initialPosition} handleNavigation={handleNavigation} />
+      ))}
 
     </group>
   );
 };
 
-const NavLink = ({ id,label, page, initialPosition, handleNavigation }) => {
+const WrappedText = ({ text, radius, fontSize }) => {
+    const letters = text.split('').map((char, index) => {
+      const angle = (index / text.length) * Math.PI ; 
+      const x = radius * Math.cos(-angle); 
+      const z = radius * Math.sin(-angle); 
+      const rotation = -angle; 
+  
+      return (
+        <Text
+          key={index}
+          position={[x, 0, z]} 
+          rotation={[0, rotation, 0]} 
+          fontSize={fontSize}
+          color="white"
+          anchorX="center"
+          anchorY="middle"
+        >
+          {char}
+        </Text>
+    );
+  });
+
+  return <group>{letters}</group>;
+};
+
+const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
   const groupRef = useRef();
 
   useFrame(({ clock }) => {
@@ -61,29 +83,28 @@ const NavLink = ({ id,label, page, initialPosition, handleNavigation }) => {
     const angularSpeed = 0.5; // Adjust the speed of rotation as needed
     const angle = elapsedTime * angularSpeed; // Continuous rotation
     const radius = 1; // Distance from the center
-    
+
     const x = initialPosition[0] + radius * Math.cos(angle);
     const z = initialPosition[2] + radius * Math.sin(angle);
-  
-    // Apply rotation to the group
-    groupRef.current.rotation.y = angle; // Rotate around y-axis
+    
+    groupRef.current.rotation.y = angle; 
   });
-  
+
+
 
   return (
     <group ref={groupRef}>
       {/* Link Sphere */}
-      <Sphere  args={[4.5, 16, 16]} position={[0, 2, 0]} onClick={() => handleNavigation(page)}>
+      <Sphere args={[4.5, 16, 16]} position={[0, 2, 0]} onClick={() => handleNavigation(page)}>
+      <WrappedText text="IMMERSITECH" radius={6} fontSize={2.5} />
         <meshStandardMaterial color={0xff3357} emissive={0x4b2253} emissiveIntensity={2.5} />
       </Sphere>
-      <Sphere args={[2.5,10,10]} position={[19, 2, 0]} onClick={() => handleNavigation(page)}>
+      <Sphere args={[2.5, 10, 10]} position={[18, 1, 0]} onClick={() => handleNavigation(page)}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
       </Sphere>
-      <Sphere args={[3.5,10,10]} position={[-19, 2, 0]}>
+      <Sphere args={[3.5, 10, 10]} position={[-18, 1, 0]}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
       </Sphere>
-
-      
 
       {/* Text Label */}
       <Text
