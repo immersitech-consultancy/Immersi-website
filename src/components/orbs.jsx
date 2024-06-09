@@ -33,7 +33,7 @@ const Orbs = () => {
         <meshStandardMaterial color={0x6e3a70} transparent opacity={0} />
       </Sphere>
 
-      <Torus args={[19,0.15,19,40]} rotation={[Math.PI/2,0,0]}>
+      <Torus args={[19,0.05,19,40]} rotation={[Math.PI/2,0,0]}>
         <meshStandardMaterial color={0x6e3a70}/>
       </Torus>
   

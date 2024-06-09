@@ -1,168 +1,74 @@
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere, Box, Torus } from "@react-three/drei";
-
+import { OrbitControls, Sphere,Torus } from "@react-three/drei";
+import OrbitingSpheres from "./OrbitSpheres";
+import KleinBottle from "./KleinBottle";
 const Contacts = () => {
   return (
     <div style={{ position: "relative", height: "100vh", background: "black" }}>
       <Canvas
-        camera={{ position: [10, 0, 20] }}
+        camera={{ position: [0, 0, 100] }}
         style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" }}
       >
-        <OrbitControls enablePan={false} enableRotate={true} maxDistance={60} minDistance={20} />
+        <OrbitControls enablePan={true} enableRotate={true} maxDistance={50} minDistance={20} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 0, 5]} intensity={1} />
-        <PointCircle />
-        <AdditionalShapes />
         <OrbitingSpheres />
+        <KleinBottle />
+        <Stars />
       </Canvas>
+      
     </div>
   );
 };
 
-const PointCircle = () => {
+const Stars = () => {
   const ref = useRef(null);
   const points = useMemo(() => {
-    const innerPoints = [...Array(50)].map((_, idx) => ({
+    return [...Array(500)].map((_, idx) => ({
       idx,
       position: [
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200,
       ],
-      color: "#00ffff"
+      color: "blue"
     }));
-    const outerPoints = [...Array(50)].map((_, idx) => ({
-      idx: idx + 50,
-      position: [
-        (Math.random() - 0.5) * 40,
-        (Math.random() - 0.5) * 40,
-        (Math.random() - 0.5) * 40,
-      ],
-      color: "#ff00ff"
-    }));
-    return [...innerPoints, ...outerPoints];
   }, []);
 
   useFrame(({ clock }) => {
     if (ref.current?.rotation) {
-      const time = clock.getElapsedTime();
-      const speed = 0.5;
-      const angle = time * speed;
+      const elaspedtime = clock.getElapsedTime();
+      const angularSpeed = 0.5;
+      const radius = 1;
+      const angle = elaspedtime * angularSpeed;
+      const x = Math.cos(angle) * radius;
+      const z = Math.sin(angle) * radius;
       ref.current.rotation.y = angle;
+      ref.current.position.x = x;
+      ref.current.position.z = z;
+    
     }
   });
 
   return (
     <group ref={ref}>
       {points.map((point) => (
-        <Point key={point.idx} position={point.position} color={point.color} />
+        <Star key={point.idx} position={point.position} color={point.color} />
       ))}
     </group>
   );
 };
 
-const Point = React.memo(({ position, color }) => {
+const Star = React.memo(({ position, color }) => {
   return (
-    <Sphere position={position} args={[0.3, 10, 10]}>
-      <meshStandardMaterial emissive={color} emissiveIntensity={0.5} roughness={0.5} color={color} />
+    <Sphere position={position} args={[0.1, 6, 6]}>
+      <meshStandardMaterial emissive={color} emissiveIntensity={1} roughness={0} color={color} />
     </Sphere>
   );
 });
 
-const AdditionalShapes = () => {
-  const ref = useRef(null);
-  const shapes = useMemo(() => {
-    return [...Array(6)].map((_, idx) => ({
-      idx,
-      position: [
-        (Math.random() - 0.5) * 30,
-        (Math.random() - 0.5) * 30,
-        (Math.random() - 0.5) * 30,
-      ],
-      shape: Math.random() > 0.5 ? "Box" : "Torus",
-      color: Math.random() > 0.5 ? "#00ff00" : "#0000ff"
-    }));
-  }, []);
 
-  useFrame(({ clock }) => {
-    if (ref.current) {
-      ref.current.rotation.x = clock.getElapsedTime() * 0.1;
-      ref.current.rotation.y = clock.getElapsedTime() * 0.1;
-    }
-  });
 
-  return (
-    <group ref={ref}>
-      {shapes.map(({ idx, position, shape, color }) => {
-        if (shape === "Box") {
-          return (
-            <Box key={idx} position={position} args={[1, 1, 1]}>
-              <meshStandardMaterial color={color} />
-            </Box>
-          );
-        } else {
-          return (
-            <Torus key={idx} position={position} args={[1, 0.4, 16, 100]}>
-              <meshStandardMaterial color={color} />
-            </Torus>
-          );
-        }
-      })}
-    </group>
-  );
-};
-
-const OrbitingSpheres = () => {
-  const ref = useRef(null);
-  const spheres = useMemo(() => {
-    return [...Array(5)].map((_, idx) => ({
-      idx,
-      position: [
-        (Math.random() - 0.5) * 30,
-        (Math.random() - 0.5) * 30,
-        (Math.random() - 0.5) * 30,
-      ],
-      color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-      segments: [...Array(8)].map((_, segIdx) => ({
-        segIdx,
-        angle: (Math.PI * 2 * segIdx) / 8,
-        distance: 2 + Math.random() * 3
-      }))
-    }));
-  }, []);
-
-  useFrame(({ clock }) => {
-    if (ref.current) {
-      ref.current.rotation.y = clock.getElapsedTime() * 0.1;
-    }
-    spheres.forEach((sphere, sphereIdx) => {
-      sphere.segments.forEach((segment, segIdx) => {
-        const angle = segment.angle + clock.getElapsedTime() * 0.5;
-        const x = Math.cos(angle) * segment.distance;
-        const z = Math.sin(angle) * segment.distance;
-        ref.current.children[sphereIdx].children[segIdx + 1].position.x = x;
-        ref.current.children[sphereIdx].children[segIdx + 1].position.z = z;
-      });
-    });
-  });
-
-  return (
-    <group ref={ref}>
-      {spheres.map(({ idx, position, color, segments }) => (
-        <group key={idx} position={position}>
-          <Sphere args={[1, 32, 32]}>
-            <meshStandardMaterial emissive={color} emissiveIntensity={0.5} roughness={0.5} color={color} />
-          </Sphere>
-          {segments.map(({ segIdx }) => (
-            <Sphere key={segIdx} args={[0.2, 16, 16]}>
-              <meshStandardMaterial color="#ffffff" />
-            </Sphere>
-          ))}
-        </group>
-      ))}
-    </group>
-  );
-};
 
 export default Contacts;
