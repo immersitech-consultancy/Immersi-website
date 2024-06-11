@@ -3,6 +3,10 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere,Torus } from "@react-three/drei";
 import OrbitingSpheres from "./OrbitSpheres";
 import KleinBottle from "./KleinBottle";
+import Harmonics from "../Harmonics";
+
+
+
 const Contacts = () => {
   return (
     <div style={{ position: "relative", height: "100vh", background: "black" }}>
@@ -10,10 +14,11 @@ const Contacts = () => {
         camera={{ position: [0, 0, 100] }}
         style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" }}
       >
-        <OrbitControls enablePan={true} enableRotate={true} maxDistance={50} minDistance={20} />
+        <OrbitControls enablePan={false} enableRotate={true}  maxDistance={20} minDistance={5} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 0, 5]} intensity={1} />
         <OrbitingSpheres />
+        <Harmonics/>
         <KleinBottle />
         <Stars />
       </Canvas>
