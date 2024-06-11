@@ -25,19 +25,20 @@ const ParticleRing = () => {
 
 const Navbar = () => {
   return (
-    <nav style={{ position: "fixed", top: 0, width: "100%", background: "rgba(0, 0, 0, 0.8)", padding: "1rem", zIndex: 10 }}>
-      <ul style={{ display: "flex", justifyContent: "center", listStyle: "none", margin: 0, padding: 0 }}>
-        <li style={{ margin: "0 1rem" }}>
-          <Link to="/" style={{ color: "white", textDecoration: "none" }}>Home</Link>
-        </li>
-        <li style={{ margin: "0 1rem" }}>
-          <Link to="/contact" style={{ color: "white", textDecoration: "none" }}>Contact</Link>
-        </li>
-        <li style={{ margin: "0 1rem" }}>
-          <Link to="/services" style={{ color: "white", textDecoration: "none" }}>Services</Link>
-        </li>
-      </ul>
-    </nav>
+    <nav className="fixed top-0 w-full bg-black bg-opacity-80 p-4 z-10">
+  <ul className="flex justify-center list-none m-0 p-0">
+    <li className="mx-4">
+      <Link to="/" className="text-white no-underline md:text-2xl">Home</Link>
+    </li>
+    <li className="mx-4">
+      <Link to="/contact" className="text-white no-underline md:text-2xl">Contact</Link>
+    </li>
+    <li className="mx-4">
+      <Link to="/services" className="text-white no-underline md:text-2xl">Services</Link>
+    </li>
+  </ul>
+</nav>
+
   );
 };
 

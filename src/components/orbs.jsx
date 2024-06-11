@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Text, Sphere,Torus } from '@react-three/drei';
 import * as THREE from 'three';
@@ -82,10 +82,12 @@ const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
     const elapsedTime = clock.getElapsedTime();
     const angularSpeed = 0.5; // Adjust the speed of rotation as needed
     const angle = elapsedTime * angularSpeed; // Continuous rotation
-    const radius = 1; // Distance from the center
+    // THe radius variable is not used anywhere
+    // const radius = 1; // Distance from the center
 
-    const x = initialPosition[0] + radius * Math.cos(angle);
-    const z = initialPosition[2] + radius * Math.sin(angle);
+// These vairables are not used anywhere
+    // const x = initialPosition[0] + radius * Math.cos(angle);
+    // const z = initialPosition[2] + radius * Math.sin(angle);
     
     groupRef.current.rotation.y = angle; 
   });
