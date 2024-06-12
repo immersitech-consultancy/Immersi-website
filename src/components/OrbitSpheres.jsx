@@ -1,4 +1,3 @@
-// OrbitingSpheres.jsx
 import React, { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Sphere } from '@react-three/drei';

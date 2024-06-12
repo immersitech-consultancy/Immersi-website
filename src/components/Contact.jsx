@@ -22,11 +22,10 @@ const Contacts = () => {
         <KleinBottle />
         <Stars />
       </Canvas>
-      
     </div>
   );
 };
-
+//added stars snd madee them roate opposite of the klein bottle
 const Stars = () => {
   const ref = useRef(null);
   const points = useMemo(() => {
