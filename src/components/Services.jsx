@@ -103,7 +103,7 @@ const Card = ({ title, description }) => {
       }}
       transition={{ duration: 0.3 }}
     >
-      <h2 className="text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 p-2 rounded-md absolute top-7">{title}</h2>
+      <h2 className="text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 md:p-2 p-[1px] rounded-md md:absolute top-7">{title}</h2>
       <p className="text-gray-300 font-bold">{description}</p>
       <div className=" absolute bottom-3 items-center justify-center text-clip">
         <button className=" bg-fuchsia-500 text-slate-950 font-black p-2 md:px-6 md:py-3 rounded-md">
