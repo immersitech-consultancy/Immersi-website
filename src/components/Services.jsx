@@ -3,7 +3,7 @@ import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere, Ring } from "@react-three/drei";
 import * as THREE from "three";
-
+import { motion } from 'framer-motion'
 
 
 const Services = () => {
@@ -19,14 +19,15 @@ const Services = () => {
         <Sun />
         <SolarSystem />
       </Canvas>
-      <div style={{ position: "absolute", top: "10%", left: "70%" }}>
-        <div style={{ display: "grid", justifyContent: "left", gap: "1rem", border:12}}>
-          <Card title="Web Development" description="E" />
-          <Card title="AWS Services" description="E" />
-          <Card title="Blockchain Development" description="E" />
+      <div className=" absolute inset-0 flex items-center justify-center">
+        <div className=" flex flex-col md:flex-row gap-3 md:gap-4">
+          <Card title="Web Development" description="    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolor rem labore atque ipsa molestiae blanditiis, voluptatum, explicabo ex perferendis totam repellat optio minus ducimus fugiat cupiditate? Temporibus, sit incidunt." />
+          <Card title="AWS Services" description="    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolor rem labore atque ipsa molestiae blanditiis, voluptatum, explicabo ex perferendis totam repellat optio minus ducimus fugiat cupiditate? Temporibus, sit incidunt." />
+          <Card title="Blockchain Development" description="    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolor rem labore atque ipsa molestiae blanditiis, voluptatum, explicabo ex perferendis totam repellat optio minus ducimus fugiat cupiditate? Temporibus, sit incidunt." />
         </div>
       </div>
     </div>
+
   );
 };
 
@@ -89,23 +90,28 @@ const OrbitRing = ({ distance }) => {
 
 const Card = ({ title, description }) => {
   return (
-<div style={{
-  background: "linear-gradient(45deg, rgba(171,3,177,1) 0%, rgba(252,255,1) 100%)", 
-  padding: "1rem", 
-  borderRadius: "20px", 
-  boxShadow: "0 0 10px rgba(0,0,0,0.3)", 
-  width: "350px", 
-  textAlign: "center",
-  opacity: "0.7",
-  
-  
-}}>
-      <h2>{title}</h2>
-      <p>{description}</p>
-    </div>
-    
+    // todo 1(abubakar): fix the card view on mobile view
+    <motion.div
+      className="bg-white relative bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-xl shadow-lg w-80 text-center md:h-[500px] border-fuchsia-500 border-2 flex flex-col items-center justify-center"
+      style={{ 
+        background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.25) 100%)",
+        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+      }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      <h2 className="text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 md:p-2 p-[1px] rounded-md md:absolute top-7">{title}</h2>
+      <p className="text-gray-300 font-bold">{description}</p>
+      <div className=" absolute bottom-3 items-center justify-center text-clip">
+        <button className=" bg-fuchsia-500 text-slate-950 font-black p-2 md:px-6 md:py-3 rounded-md">
+          Subscribe
+        </button>
+      </div>
+    </motion.div>
   );
 };
-
 
 export default Services;

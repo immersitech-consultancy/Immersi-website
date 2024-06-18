@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Text, Sphere,Torus } from '@react-three/drei';
+import { Text, Sphere,Torus, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
 const Orbs = () => {
-  const navPosition = [0, -3, 0]; // Position of the navbar in 3D space
+  // Position of the navbar in 3D space
+  const navPosition = [0, -3, 0]; 
   const { camera, scene } = useThree();
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
@@ -30,8 +31,9 @@ const Orbs = () => {
 
       {/* Navbar Background */}
       <Sphere args={[20, 52, 25]} position={[5, 0, 5]} onClick={() => handleNavigation('home')}>
-        <meshStandardMaterial color={0x6e3a70} transparent opacity={0} />
-      </Sphere>
+          <meshStandardMaterial color={0x6e3a70} transparent opacity={0} />
+          {/* html on the sphere */}
+        </Sphere>
 
       <Torus args={[19,0.05,19,40]} rotation={[Math.PI/2,0,0]}>
         <meshStandardMaterial color={0x6e3a70}/>
@@ -91,13 +93,24 @@ const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
     <group ref={groupRef}>
       <Sphere args={[4.5, 16, 16]} position={[0, 2, 0]} onClick={() => handleNavigation(page)}>
       <WrappedText text="IMMERSITECH" radius={6} fontSize={2.5} />
+      
         <meshStandardMaterial color={0xff3357} emissive={0x4b2253} emissiveIntensity={2.5} />
       </Sphere>
       <Sphere args={[2.5, 10, 10]} position={[18, 1, 0]} onClick={() => handleNavigation(page)}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
+        <Html position={[0, 0, 1]}>
+          <div className="text-neutral-200 text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 p-2 md:py-3 md:px-6 rounded-md">
+            Service
+          </div>
+        </Html>
       </Sphere>
       <Sphere args={[3.5, 10, 10]} position={[-18, 1, 0]}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
+        <Html position={[0, 0, 1]}>
+          <div className="text-neutral-200 text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 p-2 md:py-3 md:px-6 rounded-md">
+            Contact
+          </div>
+        </Html>
       </Sphere>
     </group>
   );
