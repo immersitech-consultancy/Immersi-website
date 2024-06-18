@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere,Torus } from "@react-three/drei";
+import { OrbitControls, Sphere } from "@react-three/drei";
 import OrbitingSpheres from "./OrbitSpheres";
 import KleinBottle from "./KleinBottle";
 import Harmonics from "../Harmonics";
@@ -22,7 +22,11 @@ const Contacts = () => {
         <KleinBottle />
         <Stars />
       </Canvas>
+      
+
+
     </div>
+    
   );
 };
 //added stars snd madee them roate opposite of the klein bottle

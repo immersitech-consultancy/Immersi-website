@@ -81,14 +81,7 @@ const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
     // Calculate the new position for rotation around the origin
     const elapsedTime = clock.getElapsedTime();
     const angularSpeed = 0.5; // Adjust the speed of rotation as needed
-    const angle = elapsedTime * angularSpeed; // Continuous rotation
-    // THe radius variable is not used anywhere
-    // const radius = 1; // Distance from the center
-
-// These vairables are not used anywhere
-    // const x = initialPosition[0] + radius * Math.cos(angle);
-    // const z = initialPosition[2] + radius * Math.sin(angle);
-    
+    const angle = elapsedTime * angularSpeed; // Continuous rotation    
     groupRef.current.rotation.y = angle; 
   });
 
@@ -96,7 +89,6 @@ const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
 
   return (
     <group ref={groupRef}>
-      {/* Link Sphere */}
       <Sphere args={[4.5, 16, 16]} position={[0, 2, 0]} onClick={() => handleNavigation(page)}>
       <WrappedText text="IMMERSITECH" radius={6} fontSize={2.5} />
         <meshStandardMaterial color={0xff3357} emissive={0x4b2253} emissiveIntensity={2.5} />
@@ -107,18 +99,6 @@ const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
       <Sphere args={[3.5, 10, 10]} position={[-18, 1, 0]}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
       </Sphere>
-
-      {/* Text Label */}
-      <Text
-        fontSize={0.75}
-        color="white"
-        position={[0, 0, 0]} // Position text behind the sphere
-        anchorX="center"
-        anchorY="middle"
-        textAlign="center"
-      >
-        {label}
-      </Text>
     </group>
   );
 };
