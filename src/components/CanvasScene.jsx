@@ -15,8 +15,8 @@ const CanvasScene = () => {
         <pointLight position={[-20, 0, -30]} intensity={1} />
         <PointCircle />
         <Orbs/>
-  
       </Canvas>
+      
     );
   };
 

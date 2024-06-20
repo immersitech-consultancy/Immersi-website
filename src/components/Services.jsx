@@ -1,29 +1,30 @@
-// components/Services.js
+
 import React, { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere, Ring } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from 'framer-motion'
+import { pointsOuter } from "./utils";
 
 
 const Services = () => {
   return (
     <div style={{ position: "relative", height: "100vh", width:"100vw", background: "black" }}>
       <Canvas
-        camera={{ position: [20, 10, 30] }}
-        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-      >
-        <OrbitControls enablePan={false} enableRotate={true} maxDistance={60} minDistance={20} />
+        camera={{ position: [10, 20, 30] }}
+        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+        <OrbitControls enablePan={false} enableRotate={false} maxDistance={60} minDistance={20} />
         <ambientLight intensity={5.5} />
         <pointLight position={[0, 0, 0]} intensity={1} color="#800080" />
         <Sun />
+        <Stars/>
         <SolarSystem />
       </Canvas>
       <div className=" absolute inset-0 flex items-center justify-center">
         <div className=" flex flex-col md:flex-row gap-3 md:gap-4">
-          <Card title="Web Development" description="    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolor rem labore atque ipsa molestiae blanditiis, voluptatum, explicabo ex perferendis totam repellat optio minus ducimus fugiat cupiditate? Temporibus, sit incidunt." />
-          <Card title="AWS Services" description="    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolor rem labore atque ipsa molestiae blanditiis, voluptatum, explicabo ex perferendis totam repellat optio minus ducimus fugiat cupiditate? Temporibus, sit incidunt." />
-          <Card title="Blockchain Development" description="    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolor rem labore atque ipsa molestiae blanditiis, voluptatum, explicabo ex perferendis totam repellat optio minus ducimus fugiat cupiditate? Temporibus, sit incidunt." />
+          <Card title="Web Development" description=" Unlock the full potential of your business with our comprehensive Full Stack Web Development and Design services. Our talented team of developers and designers are experts in both front-end and back-end technologies, ensuring a seamless and dynamic user experience. Whether you need a stunning website, a robust e-commerce platform, or a powerful web application, " />
+          <Card title="AWS Services" description="Maximize your cloud infrastructure with our specialized AWS Services. Our AWS Certified team, holding both AWS Certified Cloud Practitioner and AWS Certified Solutions Architect certifications, is equipped to handle all your cloud computing needs, from architecture design and implementation to ongoing management and optimization. We offer scalable solutions that enhance performance, ensure security, and reduce costs." />
+          <Card title="Blockchain Development" description="Step into the future with our cutting-edge Web3 Development and dApps services. Our dedicated Blockchain division specializes in creating decentralized applications that are secure, transparent, and efficient. Whether you’re looking to develop smart contracts, launch a new cryptocurrency, or build a robust decentralized platform, our expert team is here to help. We leverage the latest blockchain technologies to deliver innovative solutions" />
         </div>
       </div>
     </div>
@@ -31,10 +32,57 @@ const Services = () => {
   );
 };
 
+const Stars = () => {
+  const ref = useRef(null);
+  const points = useMemo(() => {
+    return [...Array(500)].map((_, idx) => ({
+      idx,
+      position: [
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200,
+      ],
+      color: "blue"
+    }));
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (ref.current?.rotation) {
+      const elaspedtime = clock.getElapsedTime();
+      const angularSpeed = 0.5;
+      const radius = 1;
+      const angle = elaspedtime * angularSpeed;
+      const x = Math.cos(angle) * radius;
+      const z = Math.sin(angle) * radius;
+      ref.current.rotation.y = angle;
+      ref.current.position.x = x;
+      ref.current.position.z = z;
+    
+    }
+  });
+
+  return (
+    <group ref={ref}>
+      {points.map((point) => (
+        <Star key={point.idx} position={point.position} color={point.color} />
+      ))}
+    </group>
+  );
+};
+
+const Star = React.memo(({ position, color }) => {
+  return (
+    <Sphere position={position} args={[0.1, 6, 6]}>
+      <meshStandardMaterial emissive={color} emissiveIntensity={1} roughness={0} color={color} />
+    </Sphere>
+  );
+});
+
+
 const Sun = () => {
   return (
     <Sphere args={[7, 32, 32]} position={[0, 0, 0]}>
-      <meshStandardMaterial emissive="#800080" emissiveIntensity={1} />
+      <meshStandardMaterial emissive="#800080" emissiveIntensity={0} />
     </Sphere>
   );
 };

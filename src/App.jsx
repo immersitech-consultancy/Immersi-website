@@ -4,6 +4,7 @@ import Contacts from "./components/Contact";
 import Services from "./components/Services";
 import Navbar from "./components/Navbar";
 import CanvasScene from "./components/CanvasScene";
+//import ParticleRing from "./components/ParticleRing";
 
 
 const Root = () => {

@@ -98,19 +98,9 @@ const NavLink = ({ label, page, initialPosition, handleNavigation }) => {
       </Sphere>
       <Sphere args={[2.5, 10, 10]} position={[18, 1, 0]} onClick={() => handleNavigation(page)}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
-        <Html position={[0, 0, 1]}>
-          <div className="text-neutral-200 text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 p-2 md:py-3 md:px-6 rounded-md">
-            Service
-          </div>
-        </Html>
       </Sphere>
       <Sphere args={[3.5, 10, 10]} position={[-18, 1, 0]}>
         <meshStandardMaterial color={0x6e3a70} emissive={0x4b2253} emissiveIntensity={2.5} />
-        <Html position={[0, 0, 1]}>
-          <div className="text-neutral-200 text-xl font-bold bg-gradient-to-tr from-fuchsia-500 via-purple-500 to-green-400 p-2 md:py-3 md:px-6 rounded-md">
-            Contact
-          </div>
-        </Html>
       </Sphere>
     </group>
   );
