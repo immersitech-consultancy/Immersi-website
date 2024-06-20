@@ -28,7 +28,7 @@ const Contacts = () => {
       </Canvas>
 
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
-        <form className="bg-white bg-opacity-70 p-8 rounded-lg shadow-lg max-w-lg w-full animate-form pointer-events-auto">
+        <form className="bg-white m-3 bg-opacity-70 p-8 rounded-lg shadow-lg max-w-lg w-full animate-form pointer-events-auto">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Get interactive demo for your business</h2>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2 text-center" htmlFor="name">
@@ -38,7 +38,7 @@ const Contacts = () => {
               className="justify-center shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pointer-events-auto"
               id="name"
               type="text"
-              placeholder="Your Name"
+              placeholder="Business Name"
             />
           </div>
           <div className="mb-4">
@@ -53,51 +53,29 @@ const Contacts = () => {
             />
           </div>
           <div className="mb-4">
-    <label className="block text-gray-700 text-3x1 font-bold mb-2 text-center">Business Type</label>
-    <div className="flex flex-col">
-      <label className="inline-flex items-center mt-2">
-        <input
-          type="radio"
-          className="form-radio pointer-events-auto"
-          name="websiteType"
-          value="personal"
-        />
-        <span className="ml-2 text-gray-700">Interactive Website</span>
-      </label>
-      <label className="inline-flex items-center mt-2">
-        <input
-          type="radio"
-          className="form-radio pointer-events-auto"
-          name="websiteType"
-          value="business"
-        />
-        <span className="ml-2 text-gray-700">Decentralized App</span>
-      </label>
-      <label className="inline-flex items-center mt-2">
-        <input
-          type="radio"
-          className="form-radio pointer-events-auto"
-          name="websiteType"
-          value="ecommerce"
-        />
-        <span className="ml-2 text-gray-700 text-left">Certified Cloud Services</span>
-      </label>
-      <label className="inline-flex items-center mt-2">
-        <input
-          type="radio"
-          className="form-radio pointer-events-auto"
-          name="websiteType"
-          value="portfolio"
-        />
-        <span className="ml-2 text-gray-700">Mobile Applications</span>
-      </label>
-    </div>
+          <label className="block text-gray-700 text-3x1 font-bold mb-2 text-center">Business Type</label>
+          <div className="flex flex-col">
+          <label className="inline-flex items-center mt-2">
+          <input type="radio" className="form-radio pointer-events-auto" name="websiteType"value="personal"/>
+          <span className="ml-2 text-gray-700">Immersive Website</span>
+          </label>
+          <label className="inline-flex items-center mt-2">
+          <input type="radio" className="form-radio pointer-events-auto" name="websiteType" value="Website"/>
+          <span className="ml-2 text-gray-700">Decentralized Application</span>
+          </label>
+          <label className="inline-flex items-center mt-2">
+          <input type="radio" className="form-radio pointer-events-auto" name="websiteType" value="DApp"/>
+          <span className="ml-2 text-gray-700 text-left">Certified AWS Cloud Services</span>
+          </label>
+          <label className="inline-flex items-center mt-2">
+          <input type="radio" className="form-radio pointer-events-auto" name="websiteType" value="portfolio"/>
+          <span className="ml-2 text-gray-700">Mobile Application</span>
+          </label>
+          </div>
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline pointer-events-auto text-center"
-              type="button"
-            >
+              className="w-96 bg-blue-500 hover:bg-blue-700 m-6 text-white font-bold py-1 px-1 rounded focus:outline-none focus:shadow-outline pointer-events-auto text-center" type="button">
               Send
             </button>
           </div>
