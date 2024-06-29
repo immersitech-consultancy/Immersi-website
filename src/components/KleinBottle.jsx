@@ -14,7 +14,7 @@ const KleinBottle = () => {
   });
 
   // Create more spheres
-  const numSpheres = 1000; // Increase the number of spheres for a more complex shape
+  const numSpheres = 1000; //spheres for a more complex shape
   const spherePositions = useMemo(() => {
     const positions = [];
     for (let i = 0; i < numSpheres; i++) {
@@ -50,9 +50,7 @@ const KleinBottle = () => {
       }
     });
 
-    // Rotate the Klein bottle
-    //groupRef.current.rotation.x = elapsedTime * 0.1; // Rotate around x-axis
-    //groupRef.current.rotation.z = elapsedTime * 0.1; // Rotate around z-axis
+
   });
 
   return (

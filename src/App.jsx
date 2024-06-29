@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Contacts from "./components/Contact";
 import Services from "./components/Services";
 import Navbar from "./components/Navbar";
-import CanvasScene from "./components/CanvasScene";
-//import ParticleRing from "./components/ParticleRing";
+import Home from "./components/Home";
+
 
 
 const Root = () => {
@@ -13,9 +13,9 @@ const Root = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<CanvasScene />} />
-          <Route path="/contact" element={<Contacts/>} />
+          <Route path="/" element={<Home />} />
           <Route path='/services' element={<Services/>}/>
+          <Route path="/contact" element={<Contacts/>} />   
         </Routes>
       </Router>
     </div>

@@ -29,7 +29,7 @@ const Contacts = () => {
 
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
         <form className="bg-white m-3 bg-opacity-70 p-8 rounded-lg shadow-lg max-w-lg w-full animate-form pointer-events-auto">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Get interactive demo for your business</h2>
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Sign up for interactive demo </h2>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2 text-center" htmlFor="name">
               Business Name
