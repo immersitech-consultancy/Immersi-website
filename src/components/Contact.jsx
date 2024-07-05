@@ -4,6 +4,7 @@ import { OrbitControls, Sphere } from "@react-three/drei";
 import OrbitingSpheres from "./OrbitSpheres";
 import KleinBottle from "./KleinBottle";
 import Harmonics from "../Harmonics";
+import { Camera } from "three";
 
 const Contacts = () => {
   return (
@@ -84,6 +85,8 @@ const Contacts = () => {
     </div>
   );
 };
+
+
 
 const Stars = () => {
   const ref = useRef(null);

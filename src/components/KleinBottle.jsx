@@ -12,6 +12,7 @@ const KleinBottle = () => {
     vertexShader,
     fragmentShader,
   });
+  
 
   // Create more spheres
   const numSpheres = 1000; //spheres for a more complex shape
